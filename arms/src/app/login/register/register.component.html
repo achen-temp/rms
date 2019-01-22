@@ -1,0 +1,137 @@
+<div class="wrapper background_mmm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+        <div class="card card-pos">
+          <div *ngIf="submitted && errorMessage" class="alert alert-danger text-center">
+            <p *ngIf="errorMessage">{{ errorMessage }}</p>
+          </div>
+          <div class="header">
+            <h4 class="title text-info text-center">Create an Account</h4>
+          </div>
+          <div class="content">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+
+                    <input type="text" id="firstName" class="form-control" formControlName="firstName" placeholder="First Name"
+                      autofocus [ngClass]="{
+                        'is-invalid': !firstName.valid && submitted
+                      }" />
+                    <div *ngIf="!firstName.valid && submitted">
+                      <small *ngIf="firstName.errors.required && submitted">First name required</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+
+                    <input type="text" id="lastName" class="form-control" formControlName="lastName" placeholder="Last Name"
+                      autofocus [ngClass]="{
+                        'is-invalid': !lastName.valid && submitted
+                      }" />
+                    <div *ngIf="!lastName.valid && submitted">
+                      <small *ngIf="lastName.errors.required && submitted">Last name required</small>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+
+                    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Email Address"
+                      autofocus [ngClass]="{
+                        'is-invalid': !email.valid && submitted
+                      }" />
+                    <div *ngIf="!email.valid && submitted">
+                      <small *ngIf="!email.valid && submitted">Please enter a valid email</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+
+                    <input type="text" id="chnName" class="form-control" formControlName="chnName" placeholder="中文名字"
+                      autofocus [ngClass]="{
+                        'is-invalid': !chnName.valid && submitted
+                      }" />
+                    <div *ngIf="!chnName.valid && submitted">
+                      <small *ngIf="chnName.errors.required && submitted">Chinese name required
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password"
+                      autofocus [ngClass]="{
+                        'is-invalid': !password.valid && submitted
+                      }" />
+                    <div *ngIf="!password.valid && submitted">
+                      <small *ngIf="password.errors.required && submitted">
+                        Password required
+                      </small>
+                      <small *ngIf="password.errors.minlength && submitted">
+                        Password should be at least 6 letters long
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+
+                    <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"
+                      placeholder="Confirm Your Password" autofocus [ngClass]="{
+                        'is-invalid': !confirmPassword.valid && submitted
+                      }" />
+                    <div *ngIf="!confirmPassword.valid && submitted">
+                      <small *ngIf="confirmPassword.errors.required && submitted">
+                        Confirm password required
+                      </small>
+                      <small *ngIf="
+                          confirmPassword.errors.passwordnotmatch && submitted
+                        ">
+                        Password does not match
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <button type="submit" class="btn btn-info btn-fill btn-block">
+                    Create Account
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <p class="small text-center text-gray-soft">
+                    Already have an account?
+                    <a routerLink="/login" routerLinkActive="active">Login</a>
+                  </p>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

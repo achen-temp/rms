@@ -1,0 +1,69 @@
+<div class="wrapper background_mmm">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+        <div class="card card-pos">
+          <div *ngIf="invalidReset" class="alert alert-danger text-center">
+            Invalid Reset.
+          </div>
+          <div class="header">
+            <h4 class="title text-info text-center">Reset your password</h4>
+          </div>
+          <div class="content">
+            <form class="mt-5" [formGroup]="resetForm" (ngSubmit)="reset()">
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+                    <p> {{ emailStr }} </p>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password"
+                      [ngClass]="{
+                        'is-invalid': submitted && password.errors
+                      }">
+                    <div *ngIf="submitted && password.errors">
+                      <small *ngIf="submitted && password.errors.required">
+                        Password Required
+                      </small>
+                      <small *ngIf="submitted && password.errors.minlength">
+                        Password no less than 6 letters long
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" id="confirmpassword" class="form-control" formControlName="confirmpassword"
+                      placeholder="Password" [ngClass]="{
+                      'is-invalid': submitted && confirmpassword.errors
+                    }">
+                    <div *ngIf="submitted && confirmpassword.errors">
+                      <small *ngIf="submitted && confirmpassword.errors.required">
+                        Password Required
+                      </small>
+                      <small *ngIf="submitted && confirmpassword.errors.passwordnotmatch">
+                        Confirm Password not same as password
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <button class="btn btn-info btn-fill btn-block">
+                    Reset Password
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

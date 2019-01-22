@@ -1,0 +1,32 @@
+.background_mmm {
+    background-image: url(/src/assets/img/bkg.png);
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    // position: absolute;
+    // z-index: 1;
+    height: 100%;
+    width: 100%;
+    // display: block;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.card-pos {
+    margin: 30% 30%;
+}
+
+.login-pos {
+    margin: 20% 30%;
+}
+
+input.is-invalid {
+    border: 1px solid red;
+}
+
+small {
+    color: red;
+}

@@ -1,0 +1,17 @@
+com\login\loginsys\service\LoginService.class
+com\login\loginsys\model\RegisterModel.class
+com\login\loginsys\constants\DTOConstants.class
+com\login\loginsys\dao\LoginDAO$1.class
+com\login\loginsys\model\LoginModel.class
+com\login\loginsys\controller\LoginController.class
+com\login\loginsys\dao\LoginDAO$LoginMapper.class
+com\login\loginsys\dto\ResultDTO.class
+com\login\loginsys\controller\RegisterController.class
+com\login\loginsys\constants\SQLConstants.class
+com\login\loginsys\dao\RegisterDAO.class
+com\login\loginsys\model\JWTModel.class
+com\login\loginsys\LoginsysApplication.class
+com\login\loginsys\dao\LoginDAO$AccountMapper.class
+com\login\loginsys\dao\LoginDAO.class
+com\login\loginsys\model\AccountModel.class
+com\login\loginsys\service\RegisterService.class

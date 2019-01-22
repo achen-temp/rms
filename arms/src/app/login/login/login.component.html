@@ -1,0 +1,100 @@
+<div class="wrapper background_mmm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-4 col-sm-4 col-md-4 col-lg-4 pull-right">
+        <h4 style="color: white; font-weight: bold;">{{ time | date:'EEEE, MMM d, y, h:mm:ss a' }}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+        <div class="card login-pos">
+          <div class="header">
+            <h4 class="title text-info text-center">{{ title }}</h4>
+          </div>
+          <div class="content">
+            <div *ngIf="submitted && invalidLogin" class="alert alert-danger text-center">
+              <p *ngIf="invalidLogin">Invalid username and/or password.</p>
+            </div>
+            <form [formGroup]="signinForm" (ngSubmit)="signIn()">
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" formControlName="email" id="email" aria-describedby="emailHelp"
+                      placeholder="Enter email" (keyup)="onClear()" [ngClass]="{ 'is-invalid': submitted && email.errors}"
+                      autofocus />
+                    <div *ngIf="
+                    submitted &&
+                    email.errors
+                  ">
+                      <small *ngIf="
+                      submitted && 
+                      email.errors.required">
+                        Email Required
+                      </small>
+                      <small *ngIf="
+                      submitted &&
+                      email.errors.pattern">
+                        Email pattern: abc@domain.com
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <a class="small pull-right text-gray-soft" routerLink="/forgetpwd" routerLinkActive="active">
+                      Forgot password?</a>
+                    <input type="password" formControlName="password" class="form-control" id="password" (keyup)="onClear()"
+                      placeholder="Password" [ngClass]="{ 'is-invalid': submitted && password.errors}" />
+                    <div *ngIf="
+                    submitted &&
+                    password.errors
+                  ">
+                      <small *ngIf="
+                      submitted &&
+                      password.errors.required">
+                        Password Required
+                      </small>
+                      <small *ngIf="
+                      submitted &&
+                      password.errors.minlength">
+                        Password should be at least 6 letters long
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <button type="submit" class="btn btn-info btn-fill btn-block">
+                    Sign In
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-10 col-sm-10 col-sm-offset-1">
+                  <p class="small text-center text-gray-soft">
+                    Don't have an account?
+                    <a routerLink="/register" routerLinkActive="active">Register</a>
+                  </p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
