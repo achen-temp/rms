@@ -23,3 +23,9 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Angular ###
+arms/node_modules/
+arms/documentation/
+/node_modules/
+/documentation/
