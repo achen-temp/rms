@@ -25,5 +25,7 @@
 /.nb-gradle/
 
 ### Angular ###
-arms/node_modules/
-/node_modules/
+###arms/node_modules/
+###/node_modules/
+###arms/documentation/
+###/documentation/
