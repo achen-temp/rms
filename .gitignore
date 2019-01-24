@@ -27,5 +27,5 @@
 ### Angular & Spring ###
 arms/node_modules/
 arms/documentation/
-#brms/.idea/
-#brms/target/
+brms/.idea/
+brms/target/
