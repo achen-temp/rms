@@ -1,3 +1,5 @@
+import { ModalComponent } from './../../shared/modal/modal/modal.component';
+import { DraggableDirective } from './../../shared/draggable/draggable.directive';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -16,6 +18,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { TestComponent } from 'app/shared/modal/test/test.component';
+import { ResizableDirective } from 'app/shared/resizable/resizable.directive';
 
 
 @NgModule({
@@ -34,7 +38,11 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    DraggableDirective,
+    ResizableDirective,
+    ModalComponent,
+    TestComponent
   ]
 })
 
