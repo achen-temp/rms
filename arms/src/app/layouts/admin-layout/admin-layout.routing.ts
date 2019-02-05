@@ -10,6 +10,7 @@ import { NotificationsComponent } from "../../notifications/notifications.compon
 import { UpgradeComponent } from "../../upgrade/upgrade.component";
 import { TimesheetsComponent } from "app/timesheets/timesheets.component";
 import { TimesheetDetailComponent } from "app/timesheets/timesheet-detail/timesheet-detail.component";
+import { TestComponent } from "app/shared/modal/test/test.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: HomeComponent },
@@ -21,5 +22,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
   { path: "notifications", component: NotificationsComponent },
-  { path: "upgrade", component: UpgradeComponent }
+  { path: "upgrade", component: UpgradeComponent },
+  { path: "test", component: TestComponent } // TestComponent is popup modal example.
 ];

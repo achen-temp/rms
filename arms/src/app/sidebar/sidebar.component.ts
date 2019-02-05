@@ -32,6 +32,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "pe-7s-rocket",
     class: "active-pro"
   }
+  // { path: '/test', title: 'Modal Test',  icon:'pe-7s-note2', class: '' },
 ];
 
 @Component({

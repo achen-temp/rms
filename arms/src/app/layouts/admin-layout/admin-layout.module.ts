@@ -2,10 +2,10 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
+import { ModalComponent } from "./../../shared/modal/modal/modal.component";
+import { DraggableDirective } from "./../../shared/draggable/draggable.directive";
 import { LbdModule } from "../../lbd/lbd.module";
 import { NguiMapModule } from "@ngui/map";
-
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 
 import { HomeComponent } from "../../home/home.component";
@@ -18,6 +18,8 @@ import { NotificationsComponent } from "../../notifications/notifications.compon
 import { UpgradeComponent } from "../../upgrade/upgrade.component";
 import { TimesheetsComponent } from "app/timesheets/timesheets.component";
 import { TimesheetDetailComponent } from "app/timesheets/timesheet-detail/timesheet-detail.component";
+import { TestComponent } from "app/shared/modal/test/test.component";
+import { ResizableDirective } from "app/shared/resizable/resizable.directive";
 
 @NgModule({
   imports: [
@@ -39,7 +41,11 @@ import { TimesheetDetailComponent } from "app/timesheets/timesheet-detail/timesh
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    DraggableDirective,
+    ResizableDirective,
+    ModalComponent,
+    TestComponent
   ]
 })
 export class AdminLayoutModule {}
