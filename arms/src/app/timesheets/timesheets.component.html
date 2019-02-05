@@ -4,19 +4,24 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="title">Striped Table with Hover</h4>
+            <h4 class="title">Timesheet Summary</h4>
             <p class="category">Here is a subtitle for this table</p>
           </div>
           <div class="content table-responsive table-full-width">
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
-                  <th *ngFor="let cell of tableData.headerRow">{{ cell }}</th>
+                  <th *ngFor="let cell of summaryData.headerRow">{{ cell }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let row of tableData.dataRows">
-                  <td *ngFor="let cell of row">{{ cell }}</td>
+                <tr *ngFor="let row of summaryData.dataRows">
+                  <td *ngFor="let cell of row; let i = index">
+                    <span *ngIf="i == 1"
+                      ><a href="/timesheetdetail">{{ cell }}</a></span
+                    >
+                    <span *ngIf="i != 1">{{ cell }}</span>
+                  </td>
                 </tr>
               </tbody>
             </table>

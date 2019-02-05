@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-declare interface TableData {
+declare interface SummaryData {
   headerRow: string[];
   dataRows: string[][];
 }
@@ -10,19 +10,45 @@ declare interface TableData {
   styleUrls: ["./timesheets.component.scss"]
 })
 export class TimesheetsComponent implements OnInit {
-  public tableData: TableData;
+  public summaryData: SummaryData;
   constructor() {}
 
   ngOnInit() {
-    this.tableData = {
-      headerRow: ["ID", "Name", "Country", "City", "Salary"],
+    this.summaryData = {
+      headerRow: [
+        "Project Name",
+        "Week",
+        "Total Hours",
+        "Status",
+        "Manager",
+        "Update Time"
+      ],
       dataRows: [
-        ["1", "Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-        ["2", "Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-        ["3", "Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-        ["4", "Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-        ["5", "Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-        ["6", "Mason Porter", "Chile", "Gloucester", "$78,615"]
+        ["Internal", "01/13/2019-01/19/2019", "0", "New", "Leaf", ""],
+        [
+          "Internal",
+          "01/06/2019-01/12/2019",
+          "40",
+          "Submitted",
+          "Leaf",
+          "01/13/2019 09:30:00"
+        ],
+        [
+          "Internal",
+          "12/30/2019-01/05/2019",
+          "40",
+          "Declined",
+          "Leaf",
+          "01/06/2019 10:00:00"
+        ],
+        [
+          "Internal",
+          "12/23/2019-12/29/2019",
+          "40",
+          "Approved",
+          "Leaf",
+          "01/03/2019 09:00:00"
+        ]
       ]
     };
   }
