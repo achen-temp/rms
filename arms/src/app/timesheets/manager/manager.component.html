@@ -1,0 +1,126 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-10 col-md-10">
+
+        <div *ngFor="let data of tableData; let j = index;">
+          <div class="card">
+            <div class="header">
+              <div class="row">
+                <div class="col-md-10">
+                  <p class="text-justify">Employee Name: {{ data.employeeName }} </p>
+                  
+                </div>
+                <div class="col-md-2">
+                  <span class="text-muted">Click here
+                    <i (click)="toggle(j)"
+                        class="glyphicon"
+                        [ngClass]="{ 'glyphicon-menu-up':data.show, 'glyphicon-menu-down': !data.show}"
+                        aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>           
+            </div>
+            <ng-container *ngIf="data.show">
+
+              <div class="content">
+                <div class="row">
+                  <div class="col-md-8">
+                      <p class="text-justify">Project Name: {{ data.projectName }} </p>
+                      <p class="text-justify">Time Interval: {{ data.timeInterval }} </p>
+                  </div>
+                  <div class="col-md-4" *ngIf="data.status=='PENDING';else other">
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-success btn-fill" (click)='onApprove(j)'>Approve</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-danger btn-fill" (click)='onDecline(j)'>Decline</button>
+                    </div>
+                  </div>
+                  <ng-template #other>
+                    <p>Status: {{ data.status }}</p>
+                  </ng-template>
+                </div>
+                <div class = "table-responsive table-full-width">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th *ngFor="let cell of data.dataRows">{{ cell[1] }}<br/>{{ cell[2] }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of subTitles; let i = index">
+                        <td>{{ row }}</td>
+                        <td *ngFor="let cell of data.dataRows">
+                          {{ cell[3+i] }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td colspan="7"></td>
+                        <td>{{ data.total }}</td>
+                      </tr>
+                      <tr>
+                        <td>Comments</td>
+                        <td colspan="8">{{ data.comments }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div> 
+            </ng-container>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" [ngStyle]="{'display': display}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Decline Reason
+        <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" class="mt-5">
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <div class="form-group">
+                <textarea 
+                  required 
+                  ngModel 
+                  name="reason"
+                  #reason="ngModel"
+                  id="reason"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': submitted && reason.errors}"></textarea>
+              </div>
+              <div *ngIf="
+                      submitted &&
+                      reason.errors">
+                      <small *ngIf="
+                        submitted && 
+                        reason.errors.required">
+                        Reason Required
+                      </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <button class="btn btn-default btn-fill" (click)="closeModalDialog()">Cancel</button>
+              <button class="btn btn-info btn-fill pull-right" (click)="submit(f)">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

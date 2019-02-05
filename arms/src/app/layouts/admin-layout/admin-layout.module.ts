@@ -1,3 +1,4 @@
+import { ManagerComponent } from './../../timesheets/manager/manager.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -34,7 +35,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    ManagerComponent
   ]
 })
 
