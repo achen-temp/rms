@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { TimesheetDetail } from "./timesheetdetail.model";
 declare interface TableHeader {
   headerTop: Date[];
@@ -11,11 +11,16 @@ declare interface TableHeader {
   styleUrls: ["./timesheet-detail.component.scss"]
 })
 export class TimesheetDetailComponent implements OnInit {
+  @Input() zIndex: number;
   public tableHeader: TableHeader;
   public timesheetdetail: TimesheetDetail;
   dateFrom: Date;
   dateTo: Date;
   show: boolean = false;
+  inputArr: string[] = [
+    "Are you sure you want to submit this timesheet?",
+    "Once submitted, it is not modifiable!"
+  ];
 
   constructor() {}
 
@@ -32,30 +37,53 @@ export class TimesheetDetailComponent implements OnInit {
       ],
       headerLeft: ["Regular", "PTO", "National Holiday"]
     };
-    this.dateFrom = new Date("12/23/2018");
-    this.dateTo = new Date("12/29/2018");
-    this.timesheetdetail = {
-      id: 1234,
-      projectName: "Internal",
-      approvalManager: "Leaf",
-      timeFrom: new Date("12/23/2019"),
-      timeTo: new Date("12/29/2019"),
-      comment: "",
-      sun: { regular: 0, pto: 0, nholiday: 0 },
-      mon: { regular: 8, pto: 0, nholiday: 0 },
-      tue: { regular: 8, pto: 0, nholiday: 0 },
-      wed: { regular: 8, pto: 0, nholiday: 0 },
-      thu: { regular: 8, pto: 0, nholiday: 0 },
-      fri: { regular: 8, pto: 0, nholiday: 0 },
-      sat: { regular: 0, pto: 0, nholiday: 0 },
-      total: 40,
-      createdBy: null,
-      createdOn: null,
-      updatedBy: null,
-      updatedOn: null
-    };
+    this.timesheetdetail = new TimesheetDetail(
+      1234,
+      "Internal",
+      "Leaf",
+      new Date("12/23/2018"),
+      new Date("12/29/2018"),
+      null,
+      { regular: null, pto: null, nholiday: null },
+      { regular: null, pto: null, nholiday: null },
+      { regular: null, pto: null, nholiday: null },
+      { regular: null, pto: null, nholiday: null },
+      { regular: null, pto: null, nholiday: null },
+      { regular: null, pto: null, nholiday: null },
+      { regular: null, pto: null, nholiday: null },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    );
   }
-  toggle() {
-    this.show = !this.show;
+  // Close Modal -- used for cancel and close
+  onCloseModal() {
+    console.log("close modal");
+  }
+
+  // Confirm Modal
+  onConfirm(message: string) {
+    console.log(message);
+  }
+
+  onClear() {
+    this.timesheetdetail.total = null;
+    this.timesheetdetail.comment = null;
+    this.timesheetdetail.sun = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.mon = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.tue = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.wed = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.thu = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.fri = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.sat = { regular: null, pto: null, nholiday: null };
+    this.timesheetdetail.total_regular = null;
+    this.timesheetdetail.total_pto = null;
+    this.timesheetdetail.total_nholiday = null;
+    this.timesheetdetail.total = null;
   }
 }

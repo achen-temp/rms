@@ -5,102 +5,110 @@
         <div class="card">
           <div class="header">
             <h4 class="title">Enter New Timesheet</h4>
-            <span class="text-muted">
-              Click here
-              <!--              <i
-                (click)="toggle()"
-                 class="pe-7s-angle-down-circle"
-              ></i> -->
-              <i
-                (click)="toggle()"
-                class="glyphicon"
-                [ngClass]="{
-                  'glyphicon-menu-up': show,
-                  'glyphicon-menu-down': !show
-                }"
-                aria-hidden="true"
-              ></i>
-            </span>
           </div>
-          <ng-container *ngIf="show">
-            <div class="content">
-              <div class="row">
-                <div class="col-md-6">
-                  <h5>Project Name: {{ timesheetdetail.projectName }}</h5>
-                  <h5>
-                    Approval Manager: {{ timesheetdetail.approvalManager }}
-                  </h5>
-                  <h5>
-                    Time Period:
-                    {{ timesheetdetail.timeFrom | date: "M/d/yyyy" }} -
-                    {{ timesheetdetail.timeTo | date: "M/d/yyyy" }}
-                  </h5>
-                </div>
-                <div class="col-md-6">
-                  <h6>Comment:</h6>
-                  <textarea
-                    type="text"
-                    id="comment"
-                    rows="3"
-                    cols="50"
-                    placeholder="Write your comment here..."
-                  ></textarea>
-                </div>
-              </div>
-              <div class="table-responsive table-full-width">
-                <table class="table table-hover table-striped">
-                  <thead>
-                    <tr colspan="9"></tr>
-                    <tr>
-                      <th class="col-md-2"></th>
-                      <th
-                        class="col-md-1"
-                        *ngFor="let cell of tableHeader.headerTop"
-                      >
-                        {{ cell | date: "EEE" }} <br />
-                        {{ cell | date: "M/d/yy" }}
-                      </th>
-                      <th class="col-md-1">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let cell of tableHeader.headerLeft">
-                      <th class="col-md-1">{{ cell }}</th>
-                      <td
-                        class="col-md-1"
-                        *ngFor="let cell of tableHeader.headerTop"
-                      >
-                        <input class="col-md-12" type="number" />
-                      </td>
-                      <td class="col-md-1">
-                        <input class="col-md-12" type="number" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th colspan="8">Total</th>
-                      <td><input class="col-md-12" type="number" /></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="row">
-                <div class="pull-right">
-                  <div class="col-md-4">
-                    <button type="submit" class="btn btn-defult btn-fill">
-                      Clear
-                    </button>
-                  </div>
-                  <div class="col-md-1"></div>
 
-                  <div class="col-md-4">
-                    <button type="submit" class="btn btn-info btn-fill">
-                      Submit
-                    </button>
-                  </div>
+          <div class="content">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Project Name: {{ timesheetdetail.projectName }}</h5>
+                <h5>Approval Manager: {{ timesheetdetail.approvalManager }}</h5>
+                <h5>
+                  Time Period:
+                  {{ timesheetdetail.timeFrom | date: "M/d/yyyy" }} -
+                  {{ timesheetdetail.timeTo | date: "M/d/yyyy" }}
+                </h5>
+              </div>
+              <div class="col-md-6">
+                <h6>Comment:</h6>
+                <textarea
+                  type="text"
+                  id="comment"
+                  [(ngModel)]="timesheetdetail.comment"
+                  rows="3"
+                  cols="50"
+                  placeholder="Write your comment here..."
+                ></textarea>
+              </div>
+            </div>
+            <div class="table-responsive table-full-width">
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr colspan="9"></tr>
+                  <tr>
+                    <th class="col-md-2"></th>
+                    <th
+                      class="col-md-1"
+                      *ngFor="let cell of tableHeader.headerTop"
+                    >
+                      {{ cell | date: "EEE" }} <br />
+                      {{ cell | date: "M/d/yy" }}
+                    </th>
+                    <th class="col-md-1">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cell of tableHeader.headerLeft">
+                    <th class="col-md-1">{{ cell }}</th>
+                    <td
+                      class="col-md-1"
+                      *ngFor="let cell of tableHeader.headerTop"
+                    >
+                      <input class="col-md-12" type="number" />
+                    </td>
+                    <td class="col-md-1">
+                      <input class="col-md-12" type="number" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th colspan="8">Total</th>
+                    <td>
+                      <input
+                        class="col-md-12"
+                        type="number"
+                        [(ngModel)]="timesheetdetail.total"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="pull-right">
+                <div class="col-md-4">
+                  <button
+                    type="submit"
+                    class="btn btn-defult btn-fill"
+                    (click)="onClear()"
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div class="col-md-1"></div>
+
+                <div class="col-md-4">
+                  <button
+                    type="submit"
+                    class="btn btn-info btn-fill"
+                    (click)="modalRoot.show()"
+                  >
+                    Submit
+                  </button>
+                  <app-modal
+                    #modalRoot
+                    [modalTitle]="'Submit your timesheet'"
+                    [width]="500"
+                    [zIndex]="zIndex"
+                    [maximizable]="true"
+                    (close)="onCloseModal()"
+                    [textExist]="true"
+                    [text]="inputArr"
+                    (confirmSubmit)="onConfirm($event)"
+                  >
+                  </app-modal>
                 </div>
               </div>
             </div>
-          </ng-container>
+          </div>
         </div>
       </div>
     </div>

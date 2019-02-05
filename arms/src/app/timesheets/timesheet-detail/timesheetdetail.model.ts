@@ -13,6 +13,9 @@ export class TimesheetDetail {
   public fri: Object;
   public sat: Object;
   public total: number;
+  total_regular: number;
+  total_pto: number;
+  total_nholiday: number;
   public createdBy: string;
   public createdOn: string;
   public updatedBy: string;
@@ -32,6 +35,9 @@ export class TimesheetDetail {
     thu: Object,
     fri: Object,
     sat: Object,
+    total_regular: number,
+    total_pto: number,
+    total_nholiday: number,
     total: number,
     createdBy: string,
     createdOn: string,
@@ -45,6 +51,9 @@ export class TimesheetDetail {
     this.timeTo = timeTo;
     this.comment = comment;
     this.total = total;
+    this.total_regular = total_regular;
+    this.total_pto = total_pto;
+    this.total_nholiday = total_nholiday;
     this.sun = sun;
     this.mon = mon;
     this.tue = tue;
