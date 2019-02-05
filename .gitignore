@@ -24,8 +24,8 @@
 /nbdist/
 /.nb-gradle/
 
-### Angular ###
+### Angular & Spring ###
 arms/node_modules/
-###/node_modules/
 arms/documentation/
-###/documentation/
+brms/.idea/
+brms/target/
