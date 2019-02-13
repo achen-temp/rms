@@ -1,0 +1,27 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-info btn-fill" (click)="modalRoot.show()">Open modal</button>
+        <button type="button" class="btn btn-info btn-fill" (click)="modalRoot2.show()">Open modal2</button>
+        <app-modal 
+          #modalRoot 
+          [modalTitle]="'Demo Decline'" 
+          [width]="500" 
+          [zIndex]="zIndex" 
+          [maximizable]="true" 
+          (close)="onCloseModal()"
+          [textExist]="true" 
+          [text]="inputArr1" 
+          [inputExist]="true" 
+          [inputStr]="'textarea'" 
+          (confirmSubmit)="onConfirm($event)">
+        </app-modal>
+        <app-modal #modalRoot2 [modalTitle]="'Demo Approve'" [width]="500" [zIndex]="zIndex" [maximizable]="true" (close)="onCloseModal()"
+        [textExist]="true" [text]="inputArr2" 
+        (confirmSubmit)="onConfirm($event)">
+        </app-modal>
+      </div>
+    </div>
+  </div>
+</div>
