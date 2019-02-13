@@ -9,7 +9,12 @@ declare interface TableData {
   total: number;
   show: boolean;
   status: string;
-}
+};
+var staEnum = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  DECLINED: 'DECLINED'
+};
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -20,7 +25,9 @@ export class ManagerComponent implements OnInit {
   public subTitles: string[];
   public display: string = 'none';
   public submitted: boolean = false;
-  private declinedIndex: number = -1;
+  private curIndex: number = -1;
+  public strArr: string[] = [];
+  public statusEnum = staEnum;
   constructor() { 
 
   }
@@ -43,7 +50,7 @@ export class ManagerComponent implements OnInit {
         comments: "PTO 4 hours on 01-13-2019",
         total: 40,
         show: false,
-        status: "PENDING"
+        status: this.statusEnum.PENDING
       },
       { employeeName: "Ben",
         projectName: "Interval",
@@ -60,44 +67,55 @@ export class ManagerComponent implements OnInit {
         comments: "PTO 4 hours on 01-13-2019",
         total: 40,
         show: false,
-        status: "PENDING"
+        status: this.statusEnum.PENDING
     },
     ];
 
   }
 
-  onApprove(index) {
-    console.log('approve ', index);
-    // TODO: send to backend
-    this.updateStatus(index, "APPROVED");
+  onCloseModal() {
+    this.clearMessage();
   }
 
-  onDecline(index) {
-    console.log('decline', index);
-    this.openModalDialog(index);
-    console.log('decline', this.display);
+  buildMessage(index: number) {
+    this.strArr.push(`Employee Name: ${this.tableData[index].employeeName}`);
+    this.strArr.push(`Project Name: ${this.tableData[index].projectName}`);
+    this.strArr.push(`Time Interval: ${this.tableData[index].timeInterval}`);
+  }
+
+  clearMessage() {
+    this.strArr = [];
+  }
+
+  onOpenApprove(index: number) {
+    this.curIndex = index;
+    this.buildMessage(this.curIndex);
+    this.strArr.push('Are you sure to approve?');
+  }
+
+  onApprove(message: string) {
+    // TODO: send to backend
+    this.tableData[this.curIndex].status = this.statusEnum.APPROVED;
+    this.tableData[this.curIndex].show = false;
+    this.clearMessage();
+  }
+
+  onOpenDecline(index: number) {
+    this.curIndex = index;
+    this.buildMessage(this.curIndex);
+    this.strArr.push('Please enter the reason to decline:');
+  }
+
+  onDecline(message: string) {
+    console.log('decline reason', message);
+    // TODO: send to backend
+    this.tableData[this.curIndex].status = this.statusEnum.DECLINED;
+    this.tableData[this.curIndex].show = false;
+    this.clearMessage();
   }
 
   updateStatus(index: number, status: string) {
     this.tableData[index].status = status;
-  }
-
-  openModalDialog(index) {
-    this.display = 'block';
-    this.declinedIndex = index;
-  }
-
-  closeModalDialog() {
-    this.display = 'none';
-  }
-
-  submit(form: NgForm) {
-    this.submitted = true;
-    if (form.invalid) return;
-    
-    console.log(form.value);
-    this.closeModalDialog();
-    this.updateStatus(this.declinedIndex, "DECLINED");
   }
 
   toggle(index) {

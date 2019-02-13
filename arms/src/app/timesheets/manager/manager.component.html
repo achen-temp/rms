@@ -7,9 +7,14 @@
           <div class="card">
             <div class="header">
               <div class="row">
-                <div class="col-md-10">
-                  <p class="text-justify">Employee Name: {{ data.employeeName }} </p>
-                  
+                <div class="col-md-8">
+                  <p class="text-justify">Employee Name: {{ data.employeeName }} </p>                  
+                </div>
+                <div class="col-md-2">
+                  <p  *ngIf="data.status !== statusEnum.PENDING" 
+                      class="text-justify"
+                      [ngClass]="{'text-success': data.status === statusEnum.APPROVED,
+                                  'text-danger': data.status === statusEnum.DECLINED}">{{ data.status }}</p>
                 </div>
                 <div class="col-md-2">
                   <span class="text-muted">Click here
@@ -29,12 +34,12 @@
                       <p class="text-justify">Project Name: {{ data.projectName }} </p>
                       <p class="text-justify">Time Interval: {{ data.timeInterval }} </p>
                   </div>
-                  <div class="col-md-4" *ngIf="data.status=='PENDING';else other">
+                  <div class="col-md-4" *ngIf="data.status == statusEnum.PENDING;else other">
                     <div class="col-md-6">
-                      <button type="button" class="btn btn-success btn-fill" (click)='onApprove(j)'>Approve</button>
+                      <button type="button" class="btn btn-success btn-fill" (click)='onOpenApprove(j); modalApprove.show()'>Approve</button>
                     </div>
                     <div class="col-md-6">
-                      <button type="button" class="btn btn-danger btn-fill" (click)='onDecline(j)'>Decline</button>
+                      <button type="button" class="btn btn-danger btn-fill" (click)='onOpenDecline(j); modalDecline.show()'>Decline</button>
                     </div>
                   </div>
                   <ng-template #other>
@@ -77,50 +82,30 @@
   </div>
 </div>
 
+<app-modal 
+  #modalApprove
+  [modalTitle]="'Approve'" 
+  [width]="500" 
+  [zIndex]="zIndex" 
+  [maximizable]="true" 
+  (close)="onCloseModal()"
+  [textExist]="true" 
+  [text]="strArr" 
+  [inputExist]="false" 
+  [inputStr]="'textarea'" 
+  (confirmSubmit)="onApprove($event)">
+</app-modal>
 
-<div class="modal" [ngStyle]="{'display': display}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4>Decline Reason
-        <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        </h4>
-      </div>
-      <div class="modal-body">
-        <form #f="ngForm" class="mt-5">
-          <div class="row">
-            <div class="col-12 col-md-12">
-              <div class="form-group">
-                <textarea 
-                  required 
-                  ngModel 
-                  name="reason"
-                  #reason="ngModel"
-                  id="reason"
-                  class="form-control"
-                  [ngClass]="{'is-invalid': submitted && reason.errors}"></textarea>
-              </div>
-              <div *ngIf="
-                      submitted &&
-                      reason.errors">
-                      <small *ngIf="
-                        submitted && 
-                        reason.errors.required">
-                        Reason Required
-                      </small>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-md-12">
-              <button class="btn btn-default btn-fill" (click)="closeModalDialog()">Cancel</button>
-              <button class="btn btn-info btn-fill pull-right" (click)="submit(f)">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal 
+  #modalDecline
+  [modalTitle]="'Decline'" 
+  [width]="500" 
+  [zIndex]="zIndex" 
+  [maximizable]="true" 
+  (close)="onCloseModal()"
+  [textExist]="true" 
+  [text]="strArr" 
+  [inputExist]="true" 
+  [inputStr]="'textarea'" 
+  (confirmSubmit)="onDecline($event)">
+</app-modal>
