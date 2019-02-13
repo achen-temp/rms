@@ -1,3 +1,4 @@
+import { ManagerComponent } from './../../timesheets/manager/manager.component';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from '../../home/home.component';
@@ -19,5 +20,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'manager',        component: ManagerComponent },
     { path: 'test',           component: TestComponent }, // TestComponent is popup modal example.
 ];

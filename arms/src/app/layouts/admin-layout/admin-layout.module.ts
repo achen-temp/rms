@@ -1,3 +1,4 @@
+import { ManagerComponent } from './../../timesheets/manager/manager.component';
 import { ModalComponent } from './../../shared/modal/modal/modal.component';
 import { DraggableDirective } from './../../shared/draggable/draggable.directive';
 import { NgModule } from '@angular/core';
@@ -39,6 +40,7 @@ import { ResizableDirective } from 'app/shared/resizable/resizable.directive';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    ManagerComponent,
     DraggableDirective,
     ResizableDirective,
     ModalComponent,
