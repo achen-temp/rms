@@ -7,6 +7,7 @@ import { DraggableDirective } from "./../../shared/draggable/draggable.directive
 import { LbdModule } from "../../lbd/lbd.module";
 import { NguiMapModule } from "@ngui/map";
 import { AdminLayoutRoutes } from "./admin-layout.routing";
+import { ManagerComponent } from "./../../timesheets/manager/manager.component";
 
 import { HomeComponent } from "../../home/home.component";
 import { UserComponent } from "../../user/user.component";
@@ -42,6 +43,7 @@ import { ResizableDirective } from "app/shared/resizable/resizable.directive";
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    ManagerComponent,
     DraggableDirective,
     ResizableDirective,
     ModalComponent,

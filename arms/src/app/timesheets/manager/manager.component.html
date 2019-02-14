@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-10 col-md-10">
+
+        <div *ngFor="let data of tableData; let j = index;">
+          <div class="card">
+            <div class="header">
+              <div class="row">
+                <div class="col-md-8">
+                  <p class="text-justify">Employee Name: {{ data.employeeName }} </p>                  
+                </div>
+                <div class="col-md-2">
+                  <p  *ngIf="data.status !== statusEnum.PENDING" 
+                      class="text-justify"
+                      [ngClass]="{'text-success': data.status === statusEnum.APPROVED,
+                                  'text-danger': data.status === statusEnum.DECLINED}">{{ data.status }}</p>
+                </div>
+                <div class="col-md-2">
+                  <span class="text-muted">Click here
+                    <i (click)="toggle(j)"
+                        class="glyphicon"
+                        [ngClass]="{ 'glyphicon-menu-up':data.show, 'glyphicon-menu-down': !data.show}"
+                        aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>           
+            </div>
+            <ng-container *ngIf="data.show">
+
+              <div class="content">
+                <div class="row">
+                  <div class="col-md-8">
+                      <p class="text-justify">Project Name: {{ data.projectName }} </p>
+                      <p class="text-justify">Time Interval: {{ data.timeInterval }} </p>
+                  </div>
+                  <div class="col-md-4" *ngIf="data.status == statusEnum.PENDING;else other">
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-success btn-fill" (click)='onOpenApprove(j); modalApprove.show()'>Approve</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-danger btn-fill" (click)='onOpenDecline(j); modalDecline.show()'>Decline</button>
+                    </div>
+                  </div>
+                  <ng-template #other>
+                    <p>Status: {{ data.status }}</p>
+                  </ng-template>
+                </div>
+                <div class = "table-responsive table-full-width">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th *ngFor="let cell of data.dataRows">{{ cell[1] }}<br/>{{ cell[2] }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of subTitles; let i = index">
+                        <td>{{ row }}</td>
+                        <td *ngFor="let cell of data.dataRows">
+                          {{ cell[3+i] }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td colspan="7"></td>
+                        <td>{{ data.total }}</td>
+                      </tr>
+                      <tr>
+                        <td>Comments</td>
+                        <td colspan="8">{{ data.comments }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div> 
+            </ng-container>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal 
+  #modalApprove
+  [modalTitle]="'Approve'" 
+  [width]="500" 
+  [zIndex]="zIndex" 
+  [maximizable]="true" 
+  (close)="onCloseModal()"
+  [textExist]="true" 
+  [text]="strArr" 
+  [inputExist]="false" 
+  [inputStr]="'textarea'" 
+  (confirmSubmit)="onApprove($event)">
+</app-modal>
+
+<app-modal 
+  #modalDecline
+  [modalTitle]="'Decline'" 
+  [width]="500" 
+  [zIndex]="zIndex" 
+  [maximizable]="true" 
+  (close)="onCloseModal()"
+  [textExist]="true" 
+  [text]="strArr" 
+  [inputExist]="true" 
+  [inputStr]="'textarea'" 
+  (confirmSubmit)="onDecline($event)">
+</app-modal>

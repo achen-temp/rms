@@ -31,7 +31,8 @@ export const ROUTES: RouteInfo[] = [
     title: "Upgrade to PRO",
     icon: "pe-7s-rocket",
     class: "active-pro"
-  }
+  },
+  { path: "/manager", title: "Manager", icon: "pe-7s-config", class: "" }
   // { path: '/test', title: 'Modal Test',  icon:'pe-7s-note2', class: '' },
 ];
 
