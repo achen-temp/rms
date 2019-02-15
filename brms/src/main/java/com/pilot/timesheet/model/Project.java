@@ -1,10 +1,12 @@
 package com.pilot.timesheet.model;
 
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "PROJECT")
@@ -19,12 +21,17 @@ public class Project {
     @Column(name = "INTERNAL")
     private String internal;
 
-    public Project(){}
-    public Project(int projectId, String projectName, String internal) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.internal = internal;
-    }
+    @Column(name = "Created_By")
+    private String createdBy;
+
+    @Column(name = "Created_On")
+    private Date createdOn;
+
+    @Column(name = "Update_By")
+    private String updateBy;
+
+    @Column(name = "Update_Timestamp")
+    private Date updateTimestamp;
 
     public int getProjectId() {
         return projectId;
@@ -48,5 +55,50 @@ public class Project {
 
     public void setInternal(String internal) {
         this.internal = internal;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Date updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public Project(int projectId, String projectName, String internal, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.internal = internal;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public Project() {
     }
 }

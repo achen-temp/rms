@@ -1,25 +1,43 @@
 package com.pilot.timesheet.model;
 
 import com.pilot.timesheet.dto.ResultDTO;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "TIMESHEET_DETAILS")
 public class TimesheetDetails extends ResultDTO {
-    @Id
-    @Column(name = "TIMESHEET_ID")
-    private int timesheetId;
+    public TimesheetDetails(String flow, String status, String errorMessage, TimeId td, int timesheetId, String day, Date date, float regularHour, float pto, float federalHoliday, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+        super(flow, status, errorMessage);
+        this.timteid = timteid;
+//        this.timesheetId = timesheetId;
+//        this.day = day;
+//        this.date = date;
+        this.regularHour = regularHour;
+        this.pto = pto;
+        this.federalHoliday = federalHoliday;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+    }
 
-    @Column(name = "DAY")
-    private String day;
+    public TimesheetDetails() {
+    }
 
-    @Column(name = "DATE")
-    private Date date;
+    @EmbeddedId
+    private TimeId timteid;
+
+//    @Column(name = "TIMESHEET_ID")
+//    private int timesheetId;
+//
+//    @Column(name = "DAY")
+//    private String day;
+//
+//    @Column(name = "DATE")
+//    private Date date;
 
     @Column(name = "REGULAR_HOUR")
     private float regularHour;
@@ -30,62 +48,63 @@ public class TimesheetDetails extends ResultDTO {
     @Column(name = "FEDERAL_HOLIDAY")
     private float federalHoliday;
 
-    public TimesheetDetails(){}
+    @Column(name = "Created_By")
+    private String createdBy;
 
-    public TimesheetDetails(int timesheetId, String day, Date date, float regularHour, float pto, float federalHoliday) {
-        this.timesheetId = timesheetId;
-        this.day = day;
-        this.date = date;
-        this.regularHour = regularHour;
-        this.pto = pto;
-        this.federalHoliday = federalHoliday;
-    }
+    @Column(name = "Created_On")
+    private Date createdOn;
 
-    public int getTimesheetId() {
-        return timesheetId;
-    }
+    @Column(name = "Update_By")
+    private String updateBy;
 
-    public void setTimesheetId(int timesheetId) {
-        this.timesheetId = timesheetId;
-    }
+    @Column(name = "Update_Timestamp")
+    private Date updateTimestamp;
 
-    public String getDay() {
-        return day;
-    }
+    @Embeddable
+    public class TimeId implements Serializable {
+        @Column(name = "TIMESHEET_ID")
+        private int timesheetId;
 
-    public void setDay(String day) {
-        this.day = day;
-    }
+        @Column(name = "DAY")
+        private String day;
 
-    public Date getDate() {
-        return date;
-    }
+        @Column(name = "DATE")
+        private Date date;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+        public int getTimesheetId() {
+            return timesheetId;
+        }
 
-    public float getRegularHour() {
-        return regularHour;
-    }
+        public void setTimesheetId(int timesheetId) {
+            this.timesheetId = timesheetId;
+        }
 
-    public void setRegularHour(float regularHour) {
-        this.regularHour = regularHour;
-    }
+        public String getDay() {
+            return day;
+        }
 
-    public float getPto() {
-        return pto;
-    }
+        public void setDay(String day) {
+            this.day = day;
+        }
 
-    public void setPto(float pto) {
-        this.pto = pto;
-    }
+        public Date getDate() {
+            return date;
+        }
 
-    public float getFederalHoliday() {
-        return federalHoliday;
-    }
+        public void setDate(Date date) {
+            this.date = date;
+        }
 
-    public void setFederalHoliday(float federalHoliday) {
-        this.federalHoliday = federalHoliday;
+        public TimeId(int timesheetId, String day, Date date) {
+            this.timesheetId = timesheetId;
+            this.day = day;
+            this.date = date;
+        }
+
+        public TimeId() {
+        }
+
     }
 }
+
+

@@ -17,12 +17,12 @@ public class Employee extends ResultDTO {
     private int employeeId;
 
     @NotBlank
-    @Column(name = "PROJECT_ID")
-    private int projectId;
-
-    @NotBlank
     @Column(name = "ROLE_ID")
     private int roleId;
+
+    @NotBlank
+    @Column(name = "PROJECT_ID")
+    private int projectId;
 
     @Column(name = "EMPLOYEE_NAME")
     private String employeeName;
@@ -33,17 +33,17 @@ public class Employee extends ResultDTO {
     @Column(name = "TIMESHEET_START_DATE")
     private Date tsStartDate;
 
+    @Column(name = "Created_By")
+    private String createdBy;
 
-    public Employee(){}
+    @Column(name = "Created_On")
+    private Date createdOn;
 
-    public Employee(int employeeId, @NotBlank int projectId, @NotBlank int roleId, String employeeName, int managerId, Date tsStartDate) {
-        this.employeeId = employeeId;
-        this.projectId = projectId;
-        this.roleId = roleId;
-        this.employeeName = employeeName;
-        this.managerId = managerId;
-        this.tsStartDate = tsStartDate;
-    }
+    @Column(name = "Update_By")
+    private String updateBy;
+
+    @Column(name = "Update_Timestamp")
+    private Date updateTimestamp;
 
     public int getEmployeeId() {
         return employeeId;
@@ -93,4 +93,52 @@ public class Employee extends ResultDTO {
         this.tsStartDate = tsStartDate;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Date updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public Employee(String flow, String status, String errorMessage, int employeeId, @NotBlank int projectId, @NotBlank int roleId, String employeeName, int managerId, Date tsStartDate, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+        super(flow, status, errorMessage);
+        this.employeeId = employeeId;
+        this.projectId = projectId;
+        this.roleId = roleId;
+        this.employeeName = employeeName;
+        this.managerId = managerId;
+        this.tsStartDate = tsStartDate;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public Employee() {
+    }
 }
