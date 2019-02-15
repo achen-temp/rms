@@ -1,6 +1,6 @@
 package com.pilot.login.controller;
 
-import com.pilot.login.constants.DTOConstants;
+import com.pilot.constants.DTOConstants;
 import com.pilot.login.dto.ResultDTO;
 import com.pilot.login.model.AccountModel;
 import com.pilot.login.model.LoginModel;
@@ -15,8 +15,6 @@ import java.sql.Timestamp;
 
 
 @RestController
-@RequestMapping("/")
-//@CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.pilot.login.constants;
+package com.pilot.constants;
 
 public class SQLConstants {
     public static final String CREATE_PROFILE =

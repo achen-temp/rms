@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
-import static com.pilot.login.constants.DTOConstants.*;
-import static com.pilot.login.constants.SQLConstants.*;
+import static com.pilot.constants.DTOConstants.*;
+import static com.pilot.constants.SQLConstants.*;
 
 import javax.mail.*;
 import javax.mail.internet.*;

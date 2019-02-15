@@ -7,8 +7,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import static com.pilot.login.constants.DTOConstants.*;
-import static com.pilot.login.constants.SQLConstants.CREATE_PROFILE;
+import static com.pilot.constants.DTOConstants.*;
+import static com.pilot.constants.SQLConstants.CREATE_PROFILE;
 
 @Repository
 public class RegisterDAO {
