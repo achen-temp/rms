@@ -10,8 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "TIMESHEET")
 public class Timesheet extends ResultDTO {
-    @EmbeddedId
-    private  TimeInfo timeInfo;
 
     @NotBlank
     @Column(name = "EMPLOYEE_ID")
@@ -20,15 +18,6 @@ public class Timesheet extends ResultDTO {
     @NotBlank
     @Column(name = "PROJECT_ID")
     private int projectId;
-
-//    @Column(name = "TIMESHEET_ID")
-//    private int timesheetId;
-//
-//    @Column(name = "TIME_FROM")
-//    private Date time_from;
-//
-//    @Column(name = "TIME_TO")
-//    private Date time_to;
 
     @Column(name = "COMMENTS")
     private String comments;
@@ -56,6 +45,9 @@ public class Timesheet extends ResultDTO {
 
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
+
+    @EmbeddedId
+    private  TimeInfo timeInfo;
 
     @Embeddable
     public class TimeInfo implements Serializable{
