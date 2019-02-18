@@ -9,12 +9,11 @@ import java.util.Date;
 @Entity
 @Table(name = "TIMESHEET_DETAILS")
 public class TimesheetDetails extends ResultDTO {
-    public TimesheetDetails(String flow, String status, String errorMessage, TimeId td, int timesheetId, String day, Date date, float regularHour, float pto, float federalHoliday, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+
+    public TimesheetDetails() { }
+
+    public TimesheetDetails(String flow, String status, String errorMessage, Double regularHour, Double pto, Double federalHoliday, String createdBy, Date createdOn, String updateBy, Date updateTimestamp, TimeId timteid) {
         super(flow, status, errorMessage);
-        this.timteid = timteid;
-//        this.timesheetId = timesheetId;
-//        this.day = day;
-//        this.date = date;
         this.regularHour = regularHour;
         this.pto = pto;
         this.federalHoliday = federalHoliday;
@@ -22,31 +21,17 @@ public class TimesheetDetails extends ResultDTO {
         this.createdOn = createdOn;
         this.updateBy = updateBy;
         this.updateTimestamp = updateTimestamp;
+        this.timteid = timteid;
     }
-
-    public TimesheetDetails() {
-    }
-
-    @EmbeddedId
-    private TimeId timteid;
-
-//    @Column(name = "TIMESHEET_ID")
-//    private int timesheetId;
-//
-//    @Column(name = "DAY")
-//    private String day;
-//
-//    @Column(name = "DATE")
-//    private Date date;
 
     @Column(name = "REGULAR_HOUR")
-    private float regularHour;
+    private Double regularHour;
 
     @Column(name = "PTO")
-    private float pto;
+    private Double pto;
 
     @Column(name = "FEDERAL_HOLIDAY")
-    private float federalHoliday;
+    private Double federalHoliday;
 
     @Column(name = "Created_By")
     private String createdBy;
@@ -59,6 +44,9 @@ public class TimesheetDetails extends ResultDTO {
 
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
+
+    @EmbeddedId
+    private TimeId timteid;
 
     @Embeddable
     public class TimeId implements Serializable {
