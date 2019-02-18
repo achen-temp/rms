@@ -1,9 +1,9 @@
 package com.pilot.login.controller;
 
-import com.pilot.login.constants.DTOConstants;
+import com.pilot.login.utils.DTOConstants;
 import com.pilot.login.dto.ResultDTO;
 import com.pilot.login.model.AccountModel;
-import com.pilot.login.model.LoginModel;
+import com.pilot.login.model.login.LoginModel;
 import com.pilot.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

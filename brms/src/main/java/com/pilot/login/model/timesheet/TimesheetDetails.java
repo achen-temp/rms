@@ -1,6 +1,8 @@
-package com.pilot.timesheet.model;
+package com.pilot.login.model.timesheet;
 
-import com.pilot.timesheet.dto.ResultDTO;
+
+
+import com.pilot.login.dto.ResultDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;

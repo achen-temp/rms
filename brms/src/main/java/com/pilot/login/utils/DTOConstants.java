@@ -1,4 +1,4 @@
-package com.pilot.login.constants;
+package com.pilot.login.utils;
 
 public class DTOConstants {
     //status

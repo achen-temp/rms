@@ -1,4 +1,4 @@
-package com.pilot.timesheet.model;
+package com.pilot.login.model.timesheet;
 
 
 import javax.persistence.Column;
