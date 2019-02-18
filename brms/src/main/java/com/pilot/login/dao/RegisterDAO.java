@@ -1,14 +1,14 @@
 package com.pilot.login.dao;
 
 import com.pilot.login.dto.ResultDTO;
-import com.pilot.login.model.RegisterModel;
+import com.pilot.login.model.login.RegisterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import static com.pilot.login.constants.DTOConstants.*;
-import static com.pilot.login.constants.SQLConstants.CREATE_PROFILE;
+import static com.pilot.login.utils.DTOConstants.*;
+import static com.pilot.login.utils.SQLConstants.CREATE_PROFILE;
 
 @Repository
 public class RegisterDAO {

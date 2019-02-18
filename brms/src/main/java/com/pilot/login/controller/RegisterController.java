@@ -1,7 +1,7 @@
 package com.pilot.login.controller;
 
 import com.pilot.login.dto.ResultDTO;
-import com.pilot.login.model.RegisterModel;
+import com.pilot.login.model.login.RegisterModel;
 import com.pilot.login.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

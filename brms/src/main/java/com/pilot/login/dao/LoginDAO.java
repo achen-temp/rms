@@ -8,8 +8,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.pilot.login.dto.ResultDTO;
 import com.pilot.login.model.AccountModel;
-import com.pilot.login.model.JWTModel;
-import com.pilot.login.model.LoginModel;
+import com.pilot.login.model.login.JWTModel;
+import com.pilot.login.model.login.LoginModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
-import static com.pilot.login.constants.DTOConstants.*;
-import static com.pilot.login.constants.SQLConstants.*;
+import static com.pilot.login.utils.DTOConstants.*;
+import static com.pilot.login.utils.SQLConstants.*;
 
 import javax.mail.*;
 import javax.mail.internet.*;

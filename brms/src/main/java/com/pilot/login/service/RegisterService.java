@@ -2,7 +2,7 @@ package com.pilot.login.service;
 
 import com.pilot.login.dao.RegisterDAO;
 import com.pilot.login.dto.ResultDTO;
-import com.pilot.login.model.RegisterModel;
+import com.pilot.login.model.login.RegisterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

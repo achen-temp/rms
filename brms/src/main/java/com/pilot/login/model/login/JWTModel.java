@@ -1,4 +1,4 @@
-package com.pilot.login.model;
+package com.pilot.login.model.login;
 
 import com.pilot.login.dto.ResultDTO;
 
