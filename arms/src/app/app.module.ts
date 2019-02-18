@@ -1,5 +1,5 @@
 import { AuthService } from "./login/auth.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -19,6 +19,8 @@ import { CookieService } from "ngx-cookie-service";
 import { ForgetPwdComponent } from "./login/forget-pwd/forget-pwd.component";
 import { ResetPwdComponent } from "./login/reset-pwd/reset-pwd.component";
 import { RegisterComponent } from "./login/register/register.component";
+
+import { FakeBackendInterceptor } from "./shared/fake-backend";
 
 @NgModule({
   imports: [
@@ -41,7 +43,11 @@ import { RegisterComponent } from "./login/register/register.component";
     ForgetPwdComponent,
     ResetPwdComponent
   ],
-  providers: [AuthService, CookieService],
+  providers: [
+    AuthService, 
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

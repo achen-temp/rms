@@ -16,12 +16,18 @@
               </thead>
               <tbody>
                 <tr *ngFor="let row of summaryData.dataRows">
-                  <td *ngFor="let cell of row; let i = index">
-                    <span *ngIf="i == 1"
-                      ><a href="/timesheetdetail">{{ cell }}</a></span
-                    >
-                    <span *ngIf="i != 1">{{ cell }}</span>
+                  <td>{{ row.projectName }}</td>
+                  <td>
+                    <a 
+                      [routerLink]="['/timesheetdetail', row.timesheetId]"
+                      routerLinkActive="active"
+                      >{{ row.startDate }}-{{ row.endDate }}
+                    </a>
                   </td>
+                  <td>{{ row.total }}</td>
+                  <td>{{ row.status }}</td>
+                  <td>{{ row.manager }}</td>
+                  <td>{{ row.updatedTime }}</td>
                 </tr>
               </tbody>
             </table>

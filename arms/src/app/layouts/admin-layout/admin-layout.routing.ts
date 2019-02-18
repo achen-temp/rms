@@ -18,7 +18,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "user", component: UserComponent },
   { path: "table", component: TablesComponent },
   { path: "timesheet", component: TimesheetsComponent },
-  { path: "timesheetdetail", component: TimesheetDetailComponent },
+  { path: "timesheetdetail/:tid", component: TimesheetDetailComponent },
   { path: "typography", component: TypographyComponent },
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
