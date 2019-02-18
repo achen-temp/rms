@@ -29,7 +29,37 @@ public class Role {
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
 
-    public Role(){}
+    public Role() { }
+
+    public Role(int roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
+    public Role(int roleId, String roleName, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public String getCreatedBy() {
         return createdBy;
@@ -63,28 +93,4 @@ public class Role {
         this.updateTimestamp = updateTimestamp;
     }
 
-    public Role(int roleId, String roleName, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
-        this.roleId = roleId;
-        this.roleName = roleName;
-        this.createdBy = createdBy;
-        this.createdOn = createdOn;
-        this.updateBy = updateBy;
-        this.updateTimestamp = updateTimestamp;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
 }
