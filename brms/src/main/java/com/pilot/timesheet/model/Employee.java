@@ -45,6 +45,32 @@ public class Employee extends ResultDTO {
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
 
+    public Employee() { }
+
+    public Employee(String flow, String status, String errorMessage, int employeeId, @NotBlank int roleId, @NotBlank int projectId, String employeeName, int managerId, Date tsStartDate) {
+        super(flow, status, errorMessage);
+        this.employeeId = employeeId;
+        this.roleId = roleId;
+        this.projectId = projectId;
+        this.employeeName = employeeName;
+        this.managerId = managerId;
+        this.tsStartDate = tsStartDate;
+    }
+
+    public Employee(String flow, String status, String errorMessage, int employeeId, @NotBlank int roleId, @NotBlank int projectId, String employeeName, int managerId, Date tsStartDate, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+        super(flow, status, errorMessage);
+        this.employeeId = employeeId;
+        this.roleId = roleId;
+        this.projectId = projectId;
+        this.employeeName = employeeName;
+        this.managerId = managerId;
+        this.tsStartDate = tsStartDate;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }
@@ -53,20 +79,20 @@ public class Employee extends ResultDTO {
         this.employeeId = employeeId;
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
     public int getRoleId() {
         return roleId;
     }
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getEmployeeName() {
@@ -123,22 +149,5 @@ public class Employee extends ResultDTO {
 
     public void setUpdateTimestamp(Date updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
-    }
-
-    public Employee(String flow, String status, String errorMessage, int employeeId, @NotBlank int projectId, @NotBlank int roleId, String employeeName, int managerId, Date tsStartDate, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
-        super(flow, status, errorMessage);
-        this.employeeId = employeeId;
-        this.projectId = projectId;
-        this.roleId = roleId;
-        this.employeeName = employeeName;
-        this.managerId = managerId;
-        this.tsStartDate = tsStartDate;
-        this.createdBy = createdBy;
-        this.createdOn = createdOn;
-        this.updateBy = updateBy;
-        this.updateTimestamp = updateTimestamp;
-    }
-
-    public Employee() {
     }
 }

@@ -33,6 +33,24 @@ public class Project {
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
 
+    public Project() { }
+
+    public Project(int projectId, String projectName, String internal) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.internal = internal;
+    }
+
+    public Project(int projectId, String projectName, String internal, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.internal = internal;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+    }
+
     public int getProjectId() {
         return projectId;
     }
@@ -87,18 +105,5 @@ public class Project {
 
     public void setUpdateTimestamp(Date updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
-    }
-
-    public Project(int projectId, String projectName, String internal, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.internal = internal;
-        this.createdBy = createdBy;
-        this.createdOn = createdOn;
-        this.updateBy = updateBy;
-        this.updateTimestamp = updateTimestamp;
-    }
-
-    public Project() {
     }
 }

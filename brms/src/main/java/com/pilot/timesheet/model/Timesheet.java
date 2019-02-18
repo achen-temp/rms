@@ -10,8 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "TIMESHEET")
 public class Timesheet extends ResultDTO {
-    @EmbeddedId
-    private  TimeInfo timeInfo;
 
     @NotBlank
     @Column(name = "EMPLOYEE_ID")
@@ -20,15 +18,6 @@ public class Timesheet extends ResultDTO {
     @NotBlank
     @Column(name = "PROJECT_ID")
     private int projectId;
-
-//    @Column(name = "TIMESHEET_ID")
-//    private int timesheetId;
-//
-//    @Column(name = "TIME_FROM")
-//    private Date time_from;
-//
-//    @Column(name = "TIME_TO")
-//    private Date time_to;
 
     @Column(name = "COMMENTS")
     private String comments;
@@ -57,6 +46,9 @@ public class Timesheet extends ResultDTO {
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
 
+    @EmbeddedId
+    private  TimeInfo timeInfo;
+
     @Embeddable
     public class TimeInfo implements Serializable{
         @Column(name = "TIMESHEET_ID")
@@ -67,6 +59,14 @@ public class Timesheet extends ResultDTO {
 
         @Column(name = "TIME_TO")
         private Date time_to;
+
+        public TimeInfo() { }
+
+        public TimeInfo(int timesheetId, Date time_from, Date time_to) {
+            this.timesheetId = timesheetId;
+            this.time_from = time_from;
+            this.time_to = time_to;
+        }
 
         public int getTimesheetId() {
             return timesheetId;
@@ -92,14 +92,132 @@ public class Timesheet extends ResultDTO {
             this.time_to = time_to;
         }
 
-        public TimeInfo(int timesheetId, Date time_from, Date time_to) {
-            this.timesheetId = timesheetId;
-            this.time_from = time_from;
-            this.time_to = time_to;
-        }
-
-        public TimeInfo() {
-        }
     }
 
+    public Timesheet() { }
+
+    public Timesheet(String flow, String status, String errorMessage, @NotBlank int employeeId, @NotBlank int projectId, String comments, Date date_submitted, String status1, int total, String manager_comments) {
+        super(flow, status, errorMessage);
+        this.employeeId = employeeId;
+        this.projectId = projectId;
+        this.comments = comments;
+        this.date_submitted = date_submitted;
+        this.status = status1;
+        this.total = total;
+        this.manager_comments = manager_comments;
+    }
+
+    public Timesheet(String flow, String status, String errorMessage, @NotBlank int employeeId, @NotBlank int projectId, String comments, Date date_submitted, String status1, int total, String manager_comments, String createdBy, Date createdOn, String updateBy, Date updateTimestamp, TimeInfo timeInfo) {
+        super(flow, status, errorMessage);
+        this.employeeId = employeeId;
+        this.projectId = projectId;
+        this.comments = comments;
+        this.date_submitted = date_submitted;
+        this.status = status1;
+        this.total = total;
+        this.manager_comments = manager_comments;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+        this.timeInfo = timeInfo;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Date getDate_submitted() {
+        return date_submitted;
+    }
+
+    public void setDate_submitted(Date date_submitted) {
+        this.date_submitted = date_submitted;
+    }
+
+    @Override
+    public String getStatus() {
+        return status;
+    }
+
+    @Override
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public String getManager_comments() {
+        return manager_comments;
+    }
+
+    public void setManager_comments(String manager_comments) {
+        this.manager_comments = manager_comments;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Date updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public TimeInfo getTimeInfo() {
+        return timeInfo;
+    }
+
+    public void setTimeInfo(TimeInfo timeInfo) {
+        this.timeInfo = timeInfo;
+    }
 }

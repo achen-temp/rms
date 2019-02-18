@@ -9,44 +9,15 @@ import java.util.Date;
 @Entity
 @Table(name = "TIMESHEET_DETAILS")
 public class TimesheetDetails extends ResultDTO {
-    public TimesheetDetails(String flow, String status, String errorMessage, TimeId td, int timesheetId, String day, Date date, float regularHour, float pto, float federalHoliday, String createdBy, Date createdOn, String updateBy, Date updateTimestamp) {
-        super(flow, status, errorMessage);
-        this.timteid = timteid;
-//        this.timesheetId = timesheetId;
-//        this.day = day;
-//        this.date = date;
-        this.regularHour = regularHour;
-        this.pto = pto;
-        this.federalHoliday = federalHoliday;
-        this.createdBy = createdBy;
-        this.createdOn = createdOn;
-        this.updateBy = updateBy;
-        this.updateTimestamp = updateTimestamp;
-    }
-
-    public TimesheetDetails() {
-    }
-
-    @EmbeddedId
-    private TimeId timteid;
-
-//    @Column(name = "TIMESHEET_ID")
-//    private int timesheetId;
-//
-//    @Column(name = "DAY")
-//    private String day;
-//
-//    @Column(name = "DATE")
-//    private Date date;
 
     @Column(name = "REGULAR_HOUR")
-    private float regularHour;
+    private Double regularHour;
 
     @Column(name = "PTO")
-    private float pto;
+    private Double pto;
 
     @Column(name = "FEDERAL_HOLIDAY")
-    private float federalHoliday;
+    private Double federalHoliday;
 
     @Column(name = "Created_By")
     private String createdBy;
@@ -60,8 +31,19 @@ public class TimesheetDetails extends ResultDTO {
     @Column(name = "Update_Timestamp")
     private Date updateTimestamp;
 
+    @EmbeddedId
+    private TimeId timteid;
+
     @Embeddable
     public class TimeId implements Serializable {
+        public TimeId() { }
+
+        public TimeId(int timesheetId, String day, Date date) {
+            this.timesheetId = timesheetId;
+            this.day = day;
+            this.date = date;
+        }
+
         @Column(name = "TIMESHEET_ID")
         private int timesheetId;
 
@@ -95,15 +77,92 @@ public class TimesheetDetails extends ResultDTO {
             this.date = date;
         }
 
-        public TimeId(int timesheetId, String day, Date date) {
-            this.timesheetId = timesheetId;
-            this.day = day;
-            this.date = date;
-        }
+    }
 
-        public TimeId() {
-        }
+    public TimesheetDetails() { }
 
+    public TimesheetDetails(String flow, String status, String errorMessage, Double regularHour, Double pto, Double federalHoliday, TimeId timteid) {
+        super(flow, status, errorMessage);
+        this.regularHour = regularHour;
+        this.pto = pto;
+        this.federalHoliday = federalHoliday;
+        this.timteid = timteid;
+    }
+
+    public TimesheetDetails(String flow, String status, String errorMessage, Double regularHour, Double pto, Double federalHoliday, String createdBy, Date createdOn, String updateBy, Date updateTimestamp, TimeId timteid) {
+        super(flow, status, errorMessage);
+        this.regularHour = regularHour;
+        this.pto = pto;
+        this.federalHoliday = federalHoliday;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.updateBy = updateBy;
+        this.updateTimestamp = updateTimestamp;
+        this.timteid = timteid;
+    }
+
+    public Double getRegularHour() {
+        return regularHour;
+    }
+
+    public void setRegularHour(Double regularHour) {
+        this.regularHour = regularHour;
+    }
+
+    public Double getPto() {
+        return pto;
+    }
+
+    public void setPto(Double pto) {
+        this.pto = pto;
+    }
+
+    public Double getFederalHoliday() {
+        return federalHoliday;
+    }
+
+    public void setFederalHoliday(Double federalHoliday) {
+        this.federalHoliday = federalHoliday;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Date updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public TimeId getTimteid() {
+        return timteid;
+    }
+
+    public void setTimteid(TimeId timteid) {
+        this.timteid = timteid;
     }
 }
 
