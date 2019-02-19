@@ -1,113 +1,130 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-xs-12 col-sm-12 col-md-10">
         <div class="card">
           <div class="header">
             <h4 class="title">Enter New Timesheet</h4>
           </div>
 
           <div class="content">
-            <div class="row">
-              <div class="col-md-6">
-                <h5>Project Name: {{ timesheetdetail.projectName }}</h5>
-                <h5>Approval Manager: {{ timesheetdetail.approvalManager }}</h5>
-                <h5>
-                  Time Period:
-                  {{ timesheetdetail.timeFrom | date: "M/d/yyyy" }} -
-                  {{ timesheetdetail.timeTo | date: "M/d/yyyy" }}
-                </h5>
-              </div>
-              <div class="col-md-6">
-                <h6>Comment:</h6>
-                <textarea
-                  type="text"
-                  id="comment"
-                  [(ngModel)]="timesheetdetail.comment"
-                  rows="3"
-                  cols="50"
-                  placeholder="Write your comment here..."
-                ></textarea>
-              </div>
-            </div>
-            <div class="table-responsive table-full-width">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr colspan="9"></tr>
-                  <tr>
-                    <th class="col-md-2"></th>
-                    <th
-                      class="col-md-1"
-                      *ngFor="let cell of tableHeader.headerTop"
-                    >
-                      {{ cell | date: "EEE" }} <br />
-                      {{ cell | date: "M/d/yy" }}
-                    </th>
-                    <th class="col-md-1">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let cell of tableHeader.headerLeft">
-                    <th class="col-md-1">{{ cell }}</th>
-                    <td
-                      class="col-md-1"
-                      *ngFor="let cell of tableHeader.headerTop"
-                    >
-                      <input class="col-md-12" type="number" />
-                    </td>
-                    <td class="col-md-1">
-                      <input class="col-md-12" type="number" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th colspan="8">Total</th>
-                    <td>
-                      <input
-                        class="col-md-12"
-                        type="number"
-                        [(ngModel)]="timesheetdetail.total"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="row">
-              <div class="pull-right">
-                <div class="col-md-4">
-                  <button
-                    type="submit"
-                    class="btn btn-defult btn-fill"
-                    (click)="onClear()"
-                  >
-                    Clear
-                  </button>
+            <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xs-6">
+                  <h5>Project Name: {{ timesheetDetail.projectName }}</h5>
+                  <h5>
+                    Approval Manager: {{ timesheetDetail.approvalManager }}
+                  </h5>
+                  <h5>
+                    Time Period:
+                    {{ timesheetDetail.dateFrom | date: "M/d/yyyy" }} -
+                    {{ timesheetDetail.dateTo | date: "M/d/yyyy" }}
+                  </h5>
                 </div>
-                <div class="col-md-1"></div>
+                <div class="col-xs-6">
+                  <h6>Comment:</h6>
+                  <div class="form-group">
+                    <textarea
+                      type="text"
+                      id="comment"
+                      rows="3"
+                      placeholder="Write your comment here..."
+                      class="form-control"
+                      formControlName="comment"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive table-full-width">
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr colspan="9"></tr>
+                    <tr>
+                      <th class="col-xs-2"></th>
+                      <th class="col-xs-1" *ngFor="let cell of headerTop">
+                        {{ cell | date: "EEE" }} <br />
+                        {{ cell | date: "M/d/yy" }}
+                      </th>
+                      <th class="col-xs-1">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let cell of headerLeft; let i = index">
+                      <th class="col-xs-1">{{ cell }}</th>
+                      <td
+                        class="col-xs-1"
+                        *ngFor="let cell of headerTop; let j = index"
+                      >
+                        <div class="form-group">
+                          <input
+                            class="col-xs-12 form-control"
+                            type="number"
+                            [formControlName]="dayName[j] + timeName[i]"
+                          />
+                        </div>
+                      </td>
+                      <td class="col-xs-1">
+                        <div class="form-group">
+                          <input
+                            class="col-xs-12 form-control"
+                            type="number"
+                            [formControlName]="'total' + timeName[i]"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="col-xs-2" colspan="8">Total</th>
+                      <td>
+                        <div class="form-group">
+                          <input
+                            class="col-xs-12 form-control"
+                            type="number"
+                            formControlName="total"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div class="pull-right">
+                  <div class="col-xs-4">
+                    <button
+                      type="submit"
+                      class="btn btn-defult btn-fill"
+                      (click)="clearForm()"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                  <div class="col-xs-1"></div>
 
-                <div class="col-md-4">
-                  <button
-                    type="submit"
-                    class="btn btn-info btn-fill"
-                    (click)="modalRoot.show()"
-                  >
-                    Submit
-                  </button>
-                  <app-modal
-                    #modalRoot
-                    [modalTitle]="'Submit your timesheet'"
-                    [width]="500"
-                    [zIndex]="zIndex"
-                    [maximizable]="true"
-                    (close)="onCloseModal()"
-                    [textExist]="true"
-                    [text]="inputArr"
-                    (confirmSubmit)="onConfirm($event)"
-                  >
-                  </app-modal>
+                  <div class="col-xs-4">
+                    <button
+                      type="submit"
+                      class="btn btn-info btn-fill"
+                      (click)="modalRoot.show()"
+                    >
+                      Submit
+                    </button>
+                    <app-modal
+                      #modalRoot
+                      [modalTitle]="'Submit your timesheet'"
+                      [width]="500"
+                      [zIndex]="zIndex"
+                      [maximizable]="true"
+                      (close)="onCloseModal()"
+                      [textExist]="true"
+                      [text]="inputArr"
+                      (confirmSubmit)="onConfirm($event)"
+                    >
+                    </app-modal>
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
