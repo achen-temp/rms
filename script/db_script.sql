@@ -3,6 +3,7 @@
 /************************************************************/
 
 /* UserLogin table */
+DROP TABLE IF EXISTS dbo.userlogin;
 CREATE TABLE dbo.userlogin (
   userid INT AUTO_INCREMENT,
   FirstName VARCHAR(30) NOT NULL,
@@ -17,12 +18,11 @@ CREATE TABLE dbo.userlogin (
   Created_On DATETIME DEFAULT CURRENT_TIMESTAMP,
   Update_By VARCHAR(100) DEFAULT 'dbo',
   Update_Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT PK_UserLogin PRIMARY KEY (UserId)
+  CONSTRAINT PK_UserLogin PRIMARY KEY (userId)
 );
 
 /*  timesheet */
-drop table dbo.timesheet;
-
+DROP TABLE IF EXISTS dbo.timesheet;
 CREATE TABLE dbo.timesheet (
   timesheet_id INT AUTO_INCREMENT,
   time_from DATE NOT NULL,
@@ -41,8 +41,7 @@ CREATE TABLE dbo.timesheet (
   CONSTRAINT PK_timesheet PRIMARY KEY (timesheet_id,time_from,time_to)
 );
 
-drop table dbo.timesheet_details;
-
+DROP TABLE IF EXISTS dbo.timesheet_details;
 CREATE TABLE dbo.timesheet_details (
   timesheet_id INT NOT NULL,
   day VARCHAR(10),
@@ -54,9 +53,10 @@ CREATE TABLE dbo.timesheet_details (
   Created_On DATETIME DEFAULT CURRENT_TIMESTAMP,
   Update_By VARCHAR(100) DEFAULT 'dbo',
   Update_Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT PK_timesheet_details PRIMARY KEY (timesheet_id,timesheet_day,timesheet_date)
+  CONSTRAINT PK_timesheet_details PRIMARY KEY (timesheet_id, day, date)
 );
 
+DROP TABLE IF EXISTS dbo.employee_profile_temp;
 CREATE TABLE dbo.employee_profile_temp (
   employee_id INT NOT NULL,
   role_id INT,
@@ -71,6 +71,7 @@ CREATE TABLE dbo.employee_profile_temp (
   CONSTRAINT PK_employee_profile PRIMARY KEY (employee_id)
 );
 
+DROP TABLE IF EXISTS dbo.project;
 CREATE TABLE dbo.project (
   project_id INT NOT NULL,
   project_name VARCHAR(100),
@@ -82,6 +83,7 @@ CREATE TABLE dbo.project (
   CONSTRAINT PK_project PRIMARY KEY (project_id)
 );
 
+DROP TABLE IF EXISTS dbo.user_role;
 CREATE TABLE dbo.user_role (
   role_id INT NOT NULL,
   role_name VARCHAR(30),
