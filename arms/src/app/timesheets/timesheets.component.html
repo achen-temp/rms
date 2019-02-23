@@ -5,7 +5,7 @@
         <div class="card">
           <div class="header">
             <h4 class="title">Timesheet Summary</h4>
-            <p class="category">Here is a subtitle for this table</p>
+            <p class="category">Internal Employee</p>
           </div>
           <div class="content table-responsive table-full-width">
             <table class="table table-hover table-striped">
@@ -16,12 +16,18 @@
               </thead>
               <tbody>
                 <tr *ngFor="let row of summaryData.dataRows">
-                  <td *ngFor="let cell of row; let i = index">
-                    <span *ngIf="i == 1"
-                      ><a routerLink="/timesheetdetail">{{ cell }}</a></span
-                    >
-                    <span *ngIf="i != 1">{{ cell }}</span>
+                  <td>{{ row["projectName"] }}</td>
+                  <td>
+                    <a
+                      [routerLink]="['/timesheetdetail', row['timesheetId']]"
+                      routerLinkActive="active"
+                      >{{ row["startDate"] }}-{{ row["endDate"] }}
+                    </a>
                   </td>
+                  <td>{{ row["total"] }}</td>
+                  <td>{{ row["status"] }}</td>
+                  <td>{{ row["manager"] }}</td>
+                  <td>{{ row["updatedTime"] }}</td>
                 </tr>
               </tbody>
             </table>

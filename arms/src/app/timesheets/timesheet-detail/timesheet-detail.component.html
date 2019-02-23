@@ -4,37 +4,38 @@
       <div class="col-xs-12 col-sm-12 col-md-10">
         <div class="card">
           <div class="header">
-            <h4 class="title">Enter New Timesheet</h4>
+            <h4 class="title">{{ title }}</h4>
           </div>
 
           <div class="content">
-            <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
-              <div class="row">
-                <div class="col-xs-6">
-                  <h5>Project Name: {{ timesheetDetail.projectName }}</h5>
-                  <h5>
-                    Approval Manager: {{ timesheetDetail.approvalManager }}
-                  </h5>
-                  <h5>
-                    Time Period:
-                    {{ timesheetDetail.dateFrom | date: "M/d/yyyy" }} -
-                    {{ timesheetDetail.dateTo | date: "M/d/yyyy" }}
-                  </h5>
-                </div>
-                <div class="col-xs-6">
-                  <h6>Comment:</h6>
-                  <div class="form-group">
-                    <textarea
-                      type="text"
-                      id="comment"
-                      rows="3"
-                      placeholder="Write your comment here..."
-                      class="form-control"
-                      formControlName="comment"
-                    ></textarea>
-                  </div>
+            <div class="col-xs-6">
+              <h5>Project Name: {{ timesheetDetail.projectName }}</h5>
+              <h5>Approval Manager: {{ timesheetDetail.approvalManager }}</h5>
+              <h5>
+                Time Period:
+                {{ timesheetDetail.dateFrom | date: "M/d/yyyy" }} -
+                {{ timesheetDetail.dateTo | date: "M/d/yyyy" }}
+              </h5>
+            </div>
+            <form
+              *ngIf="timesheetStatus == 'new' || timesheetStatus == 'declined'"
+              [formGroup]="detailForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="col-xs-6">
+                <h6>Comment:</h6>
+                <div class="form-group">
+                  <textarea
+                    type="text"
+                    id="comment"
+                    rows="3"
+                    placeholder="Write your comment here..."
+                    class="form-control"
+                    formControlName="comment"
+                  ></textarea>
                 </div>
               </div>
+
               <div class="table-responsive table-full-width">
                 <table class="table table-hover table-striped">
                   <thead>
@@ -59,7 +60,13 @@
                           <input
                             class="col-xs-12 form-control"
                             type="number"
+                            [value]="timesheetDetail[dayName[j] + timeName[i]]"
                             [formControlName]="dayName[j] + timeName[i]"
+                            [ngClass]="{
+                              'is-invalid':
+                                !detailForm.controls[dayName[j] + timeName[i]]
+                                  .valid && submitted
+                            }"
                           />
                         </div>
                       </td>
@@ -68,7 +75,13 @@
                           <input
                             class="col-xs-12 form-control"
                             type="number"
+                            [value]="timesheetDetail['total' + timeName[i]]"
                             [formControlName]="'total' + timeName[i]"
+                            [ngClass]="{
+                              'is-invalid':
+                                !detailForm.controls['total' + timeName[i]]
+                                  .valid && submitted
+                            }"
                           />
                         </div>
                       </td>
@@ -80,6 +93,11 @@
                           <input
                             class="col-xs-12 form-control"
                             type="number"
+                            [ngClass]="{
+                              'is-invalid':
+                                !detailForm.controls.total.valid && submitted
+                            }"
+                            [value]="timesheetDetail['total']"
                             formControlName="total"
                           />
                         </div>
@@ -99,16 +117,17 @@
                       Clear
                     </button>
                   </div>
-                  <div class="col-xs-1"></div>
+                  <div class="col-xs-2"></div>
 
                   <div class="col-xs-4">
                     <button
                       type="submit"
                       class="btn btn-info btn-fill"
-                      (click)="modalRoot.show()"
+                      (click)="detailForm.valid && modalRoot.show()"
                     >
                       Submit
                     </button>
+
                     <app-modal
                       #modalRoot
                       [modalTitle]="'Submit your timesheet'"
@@ -125,6 +144,72 @@
                 </div>
               </div>
             </form>
+            <div
+              *ngIf="
+                timesheetStatus == 'approved' || timesheetStatus == 'pending'
+              "
+              class="col-xs-6"
+            >
+              <h6>Comment:</h6>
+              {{ timesheetDetail.comment }}
+            </div>
+            <div
+              *ngIf="
+                timesheetStatus == 'approved' || timesheetStatus == 'pending'
+              "
+              class="table-responsive table-full-width"
+            >
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr colspan="9"></tr>
+                  <tr>
+                    <th class="col-xs-2"></th>
+                    <th class="col-xs-1" *ngFor="let cell of headerTop">
+                      {{ cell | date: "EEE" }} <br />
+                      {{ cell | date: "M/d/yy" }}
+                    </th>
+                    <th class="col-xs-1">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cell of headerLeft; let i = index">
+                    <th class="col-xs-1">{{ cell }}</th>
+                    <td
+                      class="col-xs-1"
+                      *ngFor="let cell of headerTop; let j = index"
+                    >
+                      {{ timesheetDetail[dayName[j] + timeName[i]] }}
+                    </td>
+                    <td class="col-xs-1">
+                      {{ timesheetDetail["total" + timeName[i]] }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="col-xs-2" colspan="8">Total</th>
+                    <td>
+                      {{ timesheetDetail["total"] }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              *ngIf="
+                timesheetStatus == 'approved' || timesheetStatus == 'pending'
+              "
+              class="row"
+            >
+              <div class="pull-right">
+                <div class="col-xs-4">
+                  <button
+                    class="btn btn-defult btn-fill"
+                    (click)="backToSummary()"
+                  >
+                    Back to Summary
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

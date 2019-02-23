@@ -1,6 +1,10 @@
 import { Injectable } from "@angular/core";
 import { TimesheetDetail } from "./timesheet-detail.model";
-import { TimesheetDetailSample } from "./mock-timesheet-detail";
+import {
+  TimesheetDetailSampleNew,
+  TimesheetDetailSampleApproved,
+  TimesheetDetailSampleDeclined
+} from "./mock-timesheet-detail";
 import { Observable, of } from "rxjs";
 
 @Injectable({
@@ -8,7 +12,18 @@ import { Observable, of } from "rxjs";
 })
 export class TimesheetDetailService {
   constructor() {}
-  getTimeSheetDetail(): Observable<TimesheetDetail> {
-    return of(TimesheetDetailSample);
+  getTimeSheetDetail(tid: number): Observable<TimesheetDetail> {
+    switch (tid) {
+      case 111:
+        return of(TimesheetDetailSampleNew);
+        break;
+      case 110:
+        return of(TimesheetDetailSampleDeclined);
+        break;
+      case 109:
+        return of(TimesheetDetailSampleApproved);
+        break;
+      default:
+    }
   }
 }

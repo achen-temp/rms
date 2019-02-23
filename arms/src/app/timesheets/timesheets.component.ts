@@ -1,4 +1,7 @@
+import { TimesheetSummary } from "./timesheet.summary.model";
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { environment } from "environments/environment";
 declare interface SummaryData {
   headerRow: string[];
   dataRows: string[][];
@@ -11,7 +14,8 @@ declare interface SummaryData {
 })
 export class TimesheetsComponent implements OnInit {
   public summaryData: SummaryData;
-  constructor() {}
+  private getUrl = environment.getTimeSheetSummaryUrl;
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.summaryData = {
@@ -23,33 +27,19 @@ export class TimesheetsComponent implements OnInit {
         "Manager",
         "Update Time"
       ],
-      dataRows: [
-        ["Internal", "01/13/2019-01/19/2019", "0", "New", "Leaf", ""],
-        [
-          "Internal",
-          "01/06/2019-01/12/2019",
-          "40",
-          "Submitted",
-          "Leaf",
-          "01/13/2019 09:30:00"
-        ],
-        [
-          "Internal",
-          "12/30/2019-01/05/2019",
-          "40",
-          "Declined",
-          "Leaf",
-          "01/06/2019 10:00:00"
-        ],
-        [
-          "Internal",
-          "12/23/2019-12/29/2019",
-          "40",
-          "Approved",
-          "Leaf",
-          "01/03/2019 09:00:00"
-        ]
-      ]
+      dataRows: []
     };
+
+    this.http.get(`${this.getUrl}/123`).subscribe(response => {
+      if (response && response["status"] === "failure") {
+        console.error("fail");
+      } else if (response && response["status"] === "success") {
+        response["data"].forEach(element => {
+          this.summaryData.dataRows.push(element);
+        });
+      }
+    });
+
+    // console.log(this.summaryData);
   }
 }

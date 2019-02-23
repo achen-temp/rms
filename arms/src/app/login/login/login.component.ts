@@ -1,5 +1,5 @@
-import { AuthService } from './../auth.service';
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from "./../auth.service";
+import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   AbstractControl,
@@ -8,18 +8,17 @@ import {
   Validators
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, interval } from 'rxjs';
-import { map, share } from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { Observable, interval } from "rxjs";
+import { map, share } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-
   invalidLogin: boolean;
   errors: string;
   signinForm: FormGroup;
@@ -120,15 +119,12 @@ export class LoginComponent implements OnInit {
   }
 
   onCallTime() {
-    this.http.get(this.testUrl)
-        .subscribe(
-        response => {
-          if (response && response['status'] === 'success') {
-           this.time = new Date(response['errorMessage']);
-          } else {
-            console.log('testConnection error');
-          }
-        })
+    this.http.get(this.testUrl).subscribe(response => {
+      if (response && response["status"] === "success") {
+        this.time = new Date(response["errorMessage"]);
+      } else {
+        console.log("testConnection error");
+      }
+    });
   }
-
 }
